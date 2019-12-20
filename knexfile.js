@@ -4,7 +4,7 @@ module.exports = {
   development: {
     client: "sqlite3", // our DBMS driver
     useNullAsDefault: true, //necessary when using SQLite
-    connection: {
+    connection: { //the location of our db
       filename: "./produce.db3",
     },
   },
