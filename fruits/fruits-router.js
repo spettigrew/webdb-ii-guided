@@ -1,21 +1,14 @@
 const express = require("express")
-const knex = require("knex")
-
-const db = knex({
-  client: "sqlite3",
-  useNullAsDefault: true,
-  connection: {
-    filename: "./produce.db3",
-  },
-})
+const db = require('../utils/db')
 
 const router = express.Router()
 
 router.get("/", async (req, res, next) => {
   try {
+    // const FRUITS = "fruits" then await db("FRUITS") can be done as well. 
     const fruits = await db("fruits").select()
     
-    res.json(fruits)
+    return res.json(fruits)
   } catch (err) {
     next(err)
   }
@@ -25,7 +18,7 @@ router.get("/:id", async (req, res, next) => {
   try {
     const fruit = await db("fruits").where({ id: req.params.id }).first()
     
-    res.json(fruit)
+     return res.json(fruit)
   } catch (err) {
     next(err)
   }
